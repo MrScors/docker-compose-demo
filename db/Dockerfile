@@ -1,4 +1,3 @@
 FROM mysql:8.0
 
-ENV MYSQL_ROOT_PASSWORD="docker"
-ENV MYSQL_DATABASE="docker"
+ADD demo.sql /docker-entrypoint-initdb.d/demo.sql
