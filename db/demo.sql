@@ -19,9 +19,9 @@
 -- Current Database: `demo`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `docker` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `demo` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `docker`;
+USE `demo`;
 
 --
 -- Table structure for table `book`
