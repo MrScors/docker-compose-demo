@@ -15,7 +15,6 @@ public class Book {
     private String author;
     @Column(name = "title")
     private String title;
-
     public Book() {
     }
 
