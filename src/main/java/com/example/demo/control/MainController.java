@@ -3,6 +3,8 @@ package com.example.demo.control;
 import com.example.demo.model.Book;
 import com.example.demo.repo.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,38 +25,40 @@ public class MainController {
     }
 
     @GetMapping(path = "/hello")
-    public String sayHello() {
-        return "Hello";
+    public ResponseEntity<String> sayHello() {
+        return new ResponseEntity<>("Hello", HttpStatus.OK);
     }
 
     @GetMapping(path = "/read")
-    public List<String> readBooks() {
+    public ResponseEntity<List<String>> readBooks() {
         List<String> books = new ArrayList<String>();
         for (Book b : bookRepo.findAll()) {
             books.add(b.toString());
         }
 
-        return books;
+        return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
     @PostMapping(path = "/create")
-    public String createBook(@QueryParam("author") String author,
-                             @QueryParam("title") String title) {
+    public ResponseEntity<String> createBook(@QueryParam("author") String author,
+                                             @QueryParam("title") String title
+    ) {
         Book book = new Book(author, title);
         try {
             bookRepo.save(book);
         } catch (Exception e) {
-            return "Error";
+            return new ResponseEntity<>("Error saving book", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return "Book created";
+        return new ResponseEntity<>("Created", HttpStatus.CREATED);
     }
 
 
     @PutMapping(path = "/update")
-    public String updateBook(@RequestParam("id") Long id,
-                             @RequestParam(defaultValue = "none") String author,
-                             @RequestParam(defaultValue = "none") String title){
+    public ResponseEntity<String> updateBook(@RequestParam("id") Long id,
+                                             @RequestParam(defaultValue = "none") String author,
+                                             @RequestParam(defaultValue = "none") String title
+    ) {
         try {
 
             Book book = bookRepo.findById(id).orElse(null);
@@ -66,26 +70,27 @@ public class MainController {
             if (!title.intern().equals("none")) {
                 book.setTitle(title);
             }
+
             bookRepo.save(book);
 
         } catch (AssertionError e) {
-            return "Failed to find book";
+            return new ResponseEntity<>("Book not found", HttpStatus.NOT_FOUND);
         } catch (Exception e) {
-            return e.toString();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return "Updated";
+        return new ResponseEntity<>("Updated", HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/deleteByAuthor")
-    public String deleteBookByAuthor(@QueryParam("author") String author) {
+    @DeleteMapping(path = "/delete_by_author")
+    public ResponseEntity<String> deleteBookByAuthor(@QueryParam("author") String author) {
         try {
             bookRepo.deleteByAuthor(author);
         } catch (Exception e) {
-            return e.getMessage();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return "Deleted";
+        return new ResponseEntity<>("Recourse deleted successfully", HttpStatus.OK);
     }
 
 }

@@ -1,9 +1,14 @@
 package com.example.demo.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
-import java.util.HashMap;
 
 @Entity
+@Getter @Setter @NoArgsConstructor
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
@@ -16,32 +21,14 @@ public class Book {
     private String author;
     @Column(name = "title")
     private String title;
-    public Book() {
-    }
 
     public Book(String author, String title) {
         this.author = author;
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @Override
     public String toString() {
-        return "{id = " + Long.toString(id) + ", author = " + author + ",  title = " + title + "}";
+        return "{id = " + id + ", author = " + author + ", title = " + title + "}";
     }
 }

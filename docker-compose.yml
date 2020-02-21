@@ -2,14 +2,6 @@ version: '3.1'
 
 services:
 
-  # app:
-  #   build: .
-  #   restart: always
-  #   ports:
-  #     - 8085:8080
-  #   depends_on:
-  #     - db
-
   db:
     build: ./db
     restart: always
@@ -17,4 +9,20 @@ services:
       - 3307:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
-#      MYSQL_DATABASE: demo
+    #      MYSQL_DATABASE: demo
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - 8085:8080
+    depends_on:
+      - db
+
+  app_clone:
+    build: .
+    restart: always
+    ports:
+      - 8086:8080
+    depends_on:
+      - db
