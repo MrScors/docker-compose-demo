@@ -7,4 +7,4 @@ addons:
       secure: "gjnmVSKiJqEvcRScruxZ4nRkmSP3v8ef6Fhra2UDcM7lWo3rstKiYsdnqNA6QBRLzwboJEFwqQiHzprI4Nt+Fa1ecw7Drt2RFCxe+n31kAKukrFXja4H53YCaQobHsPWyTjfslMrkg6mdhCYXv1bUpm1qo2m8YqOOTERTxIUk0nzBTA5N/g8XYvH4Qg7tiL7KsW8rMjJ5ActZqvsBEJliimjRtl9+rOrmLRp8680Fm4T6J/Dw+pWTQi23s+KvvUAfDf+Z6nX/EQWSrmAY/AbFntit667sj18C1Yb/cQog3Ddei5ncdiTaTd2ZyidcWBRXLfah6ZXK4sH0FvdYDMKiIWMO+kyB8CUBsxji4TqFdaLflNksqB4RtPhWHRmv/WyjE7c0Bho9eD5krXX1w/VXZJVGfmDFNIU5yKmBiDXisAZoeuXxqFN0zkN8bilAIpXSTN186wSKrS7FGC7I+aKbQzKowuThck0ASTph+twUQ0k85w4P10gEYcmE6mdMdw75jIvN7EjGwlNuWY6TwrModiQm+9WOK/8VqV7aoQd/8vy6cI/u2LR5yNiZtK4Rw88hxFdUgscW0LWZDIshLIIWR+4DzyGqfPzxlaAWrh0X6uAuqMyHUJ+ReABCtZ7hwrGo15gjLNv/HjlmwdsCuyFEMYmSnfbNjFHfVnkItXTfqA="
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=MrScors_docker-compose-demo
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=MrScors_docker-compose-demo -Dsonar.login=MrScors
